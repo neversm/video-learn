@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nevers Educational Videos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://iili.io/dSTy2kJ.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+    <div class="menu-bar">
+        <img src="https://iili.io/dSzWY3Q.jpg" alt="Name Logo">
+        <nav>
+            <ul>
+                <li><a href="#" id="homeLink"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="#" id="searchLink"><i class="fas fa-search"></i>Search</a></li>
+                <li class="editor-only"><a href="#" id="libraryLink"><i class="fas fa-book"></i>Your Playlists</a></li>
+            </ul>
+        </nav>
+        <div class="user-collection">
+            <nav>
+                <ul>
+                    <li class="editor-only"><a href="#" id="createPlaylistLink"><i class="fas fa-plus-square"></i>Create Playlist</a></li>
+                    <li class="editor-only"><a href="#" id="likedPostsLink"><i class="fas fa-heart"></i>Liked Posts</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="install-app">
+            <a href="#"><i class="fas fa-arrow-circle-down"></i>Email</a>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <button><i class="fas fa-user"></i>Nevers M</button>
+            <button id="settingsToggle"><i class="fas fa-cog"></i></button>
+        </header>
+        <div id="settingsMenu" style="display: none;">
+            <ul>
+                <li><a href="#">Account<i class="fas fa-external-link-alt"></i></a></li>
+                <li><a href="#" id="userModeLink">User</a></li>
+                <li><a href="#" id="editorModeLink">Editor</a></li>
+            </ul>
+        </div>
+        <main>
+            <div class="greeting">
+                <h2>Videos</h2>
+            </div>
+            <div class="text-editor editor-only">
+    		<div id="editor"></div>
+    		<input type="file" id="videoUpload" accept="video/*" style="display: none;">
+    		<input type="file" id="imageUpload" accept="image/png, image/jpeg" style="display: none;">
+    		<button id="uploadVideoButton">Upload Video</button>
+    		<button id="uploadImageButton">Upload Image</button>
+    		<button id="postButton">POST</button>
+	    </div>
+            <div id="searchContainer" style="display: none;">
+    		<input type="text" id="searchInput" placeholder="Search posts...">
+    		<button id="closeSearch">❌</button>
+ 	    </div>
+            <div class="recent-activity" id="recentActivity">
+                <!-- Recent activity items will be dynamically added here -->
+            </div>
+            <div id="postContainer">
+                <!-- Posts will be dynamically added here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Playlist Modal -->
+    <div id="createPlaylistModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Playlist</h2>
+            <input type="text" id="playlistNameInput" placeholder="Enter playlist name">
+            <div id="playlistPostList">
+                <!-- Available posts will be dynamically added here -->
+            </div>
+            <button id="savePlaylistButton">Save Playlist</button>
+        </div>
+    </div>
+
+    <!-- Passcode Modal -->
+    <div id="passcodeModal" class="modal">
+        <div class="modal-content">
+            <h2>Enter Passcode</h2>
+            <input type="password" id="passcodeInput" placeholder="Enter passcode">
+            <button id="submitPasscode">Submit</button>
+            <button id="cancelPasscode">Cancel</button>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getStorage } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAj9z-C54SUnKoTuCutVpd98Bfx_uVkgso",
+            authDomain: "quiz-responses-9b05c.firebaseapp.com",
+            projectId: "quiz-responses-9b05c",
+            storageBucket: "quiz-responses-9b05c.appspot.com",
+            messagingSenderId: "997487090197",
+            appId: "1:997487090197:web:4fbc217cf00dc54504cc1c",
+            measurementId: "G-LYDTN08HBF"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // Make Firebase services available globally
+        window.db = db;
+        window.storage = storage;
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
